@@ -95,10 +95,10 @@ const App = () => {
   }
 
   return (
-    <div className="todoapp stack-large">
+    <div className="todolist box-large">
       <h1>To Do List</h1>
       <Form onAddTask={addTaskHandler} />
-      <div className="filters btn-group stack-exception">{filterList}</div>
+      <div className="filters btn-group">{filterList}</div>
       {content}
     </div>
   );

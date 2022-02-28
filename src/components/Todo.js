@@ -3,12 +3,14 @@ import React, { useState, useRef, useEffect } from "react";
 const Todo = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState("");
+  const [isEmpty, setIsEmpty] = useState(false);
 
   const editFieldRef = useRef(null);
   const editButtonRef = useRef(null);
 
   const editChangeHandler = (e) => {
     setNewName(e.target.value);
+    setIsEmpty(false);
   };
 
   const submitHandler = (e) => {
@@ -17,6 +19,9 @@ const Todo = (props) => {
       props.onEditTask(props.id, newName);
       setNewName("");
       setIsEditing(false);
+      setIsEmpty(false);
+    } else {
+      setIsEmpty(true);
     }
   };
 
@@ -40,7 +45,7 @@ const Todo = (props) => {
   }, [wasEditing, isEditing]);
 
   const editingTemplate = (
-    <form className="stack-small" onSubmit={submitHandler}>
+    <form className="box-small" onSubmit={submitHandler}>
       <div className="form-group">
         <label className="todo-label" htmlFor={props.id}>
           New name for {props.name}
@@ -48,8 +53,9 @@ const Todo = (props) => {
         <input
           ref={editFieldRef}
           id={props.id}
-          className="todo-text"
+          className={`todo-text ${isEmpty ? "invalid" : ""}`}
           type="text"
+          maxLength="40"
           onChange={editChangeHandler}
         />
       </div>
@@ -69,8 +75,8 @@ const Todo = (props) => {
   );
 
   const viewTemplate = (
-    <div className="stack-small">
-      <div className="c-cb">
+    <div className="box-small">
+      <div className="checkbox">
         <input
           id={props.id}
           type="checkbox"

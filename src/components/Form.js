@@ -2,9 +2,11 @@ import React, { useState } from "react";
 
 const Form = (props) => {
   const [name, setName] = useState("");
+  const [isEmpty, setIsEmpty] = useState(false);
 
   const nameChangeHandler = (e) => {
     setName(e.target.value);
+    setIsEmpty(false);
   };
 
   const submitHandler = (e) => {
@@ -12,6 +14,9 @@ const Form = (props) => {
     if (name.trim() !== "") {
       props.onAddTask(name);
       setName("");
+      setIsEmpty(false);
+    } else {
+      setIsEmpty(true);
     }
   };
 
@@ -25,9 +30,10 @@ const Form = (props) => {
       <input
         type="text"
         id="new-todo-input"
-        className="input input__lg"
+        className={`input input__lg ${isEmpty ? "invalid" : ""}`}
         name="text"
         value={name}
+        maxLength="40"
         autoComplete="off"
         onChange={nameChangeHandler}
       />

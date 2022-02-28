@@ -4,7 +4,7 @@ const FilterButton = (props) => {
   return (
     <button
       type="button"
-      className="btn toggle-btn"
+      className="btn filter-btn"
       aria-pressed={props.isPressed}
       onClick={() => props.setFilter(props.name)}
     >

@@ -16,7 +16,7 @@ const ToDoList = (props) => {
       />
     ));
 
-  return <ul className="todo-list stack-large stack-exception">{taskList}</ul>;
+  return <ul className="todo-list box-large">{taskList}</ul>;
 };
 
 export default ToDoList;
